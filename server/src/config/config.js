@@ -3,11 +3,11 @@ export const DATABASE = "mongodb+srv://uttomkumar00779:JP1d7SDNWwKewdfE1a2dfas@c
 export const JWT_KEY =  "ABC123412341234"
 export const JWT_EXPIRE_TIME = 30*24*60*60
 
-export const EMAIL_HOST = "mail.themesoft69.com"
-export const EMAIL_PORT = 465
-export const EMAIL_SECURITY=true
-export const EMAIL_USER="mern_ostad@themesoft69.com"
-export const EMAIL_PASS="h4e24DFTj6v)"
+export const EMAIL_HOST = "smtp.gmail.com"
+export const EMAIL_PORT = 587
+export const EMAIL_SECURITY=false
+export const EMAIL_USER="uttom00781@gmail.com"
+export const EMAIL_PASS="zsscyvhplonhxxsq"
 export const EMAIL_UN_AUTH=false
 
 export const WEB_CACHE = false

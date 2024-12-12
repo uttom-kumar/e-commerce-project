@@ -1,11 +1,12 @@
 import nodemailer from 'nodemailer'
-import { EMAIL_HOST, EMAIL_PASS, EMAIL_PORT, EMAIL_USER } from '../config/config.js'
+import {EMAIL_HOST, EMAIL_PASS, EMAIL_PORT, EMAIL_SECURITY, EMAIL_USER} from '../config/config.js'
 
 export const EmailSend = async (EmailTo, EmailText, EmailSubject) => {
     let transport = nodemailer.createTransport({
+        service: 'gmail',
         host: EMAIL_HOST,
         port : EMAIL_PORT,
-        secure : true,
+        secure : EMAIL_SECURITY,
         auth:{
             user : EMAIL_USER,
             pass : EMAIL_PASS
