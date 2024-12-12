@@ -1,10 +1,12 @@
 import axios from "axios";
 import {create} from "zustand";
 
+let baseURl = "https://e-commerce-project-six-eta.vercel.app/api/"
+
 const ProductStore = create((set) => ({
     BrandList : null,
     BrandListRequest : async () => {
-        let url = 'http://localhost:5050/api/ProductBrandList'
+        let url = `${baseURl}ProductBrandList`
         let res = await axios.get(url)
         if(res.data['status'] === "success"){
             set({BrandList : res.data.data})
@@ -14,7 +16,7 @@ const ProductStore = create((set) => ({
 
     categoryList : null,
     CategoryListRequest : async () => {
-        let url = 'http://localhost:5050/api/ProductCategoryList'
+        let url = `${baseURl}ProductCategoryList`
         let res = await axios.get(url)
         if(res.data['status'] === "success"){
             set({categoryList : res.data['data']})
@@ -23,7 +25,7 @@ const ProductStore = create((set) => ({
 
     ProductSliderList: null,
     ProductSliderListRequest : async () => {
-        let url = 'http://localhost:5050/api/ProductSliderList'
+        let url = `${baseURl}ProductSliderList`
         let res = await axios.get(url)
         console.log(res);
         
@@ -34,7 +36,7 @@ const ProductStore = create((set) => ({
 
     ProductListByRemark:null,
     ProductListByRemarkRequest : async (remark) => {
-        let url = `http://localhost:5050/api/ProductListByRemark/${remark}` //remark
+        let url = `${baseURl}ProductListByRemark/${remark}` //remark
         let res = await axios.get(url)
         if(res.data['status'] === "success"){
             set({ProductListByRemark : res.data['data']})
@@ -44,28 +46,28 @@ const ProductStore = create((set) => ({
 
     ProductList: null,
     ProductListByBrandRequest : async (BrandID) => {
-        let url = `http://localhost:5050/api/ProductListByBrand/${BrandID}` //BrandID
+        let url = `${baseURl}ProductListByBrand/${BrandID}` //BrandID
         let res = await axios.get(url)
         if(res.data['status'] === "success"){
             set({ProductList : res.data['data']})
         }
     },
     ProductListByCategoryRequest : async (CategoryID) => {
-        let url = `http://localhost:5050/api/ProductListByCategory/${CategoryID}` //CategoryID
+        let url = `${baseURl}ProductListByCategory/${CategoryID}` //CategoryID
         let res = await axios.get(url)
         if(res.data['status'] === "success"){
             set({ProductList : res.data['data']})
         }
     },
     ProductListByKeywordRequest : async (keyword) => {
-        let url = `http://localhost:5050/api/ProductListByKeyword/${keyword}` //keyword
+        let url = `${baseURl}ProductListByKeyword/${keyword}` //keyword
         let res = await axios.get(url)
         if(res.data['status'] === "success"){
             set({ProductList : res.data['data']})
         }
     },
     ProductListByFilterRequest : async (postBody) => {
-        let res = await axios.post(`http://localhost:5050/api/ProductListByFilter`,postBody)
+        let res = await axios.post(`${baseURl}ProductListByFilter`,postBody)
         if(res.data['status'] === "success"){
             set({ProductList : res.data['data']})
         }
@@ -80,7 +82,7 @@ const ProductStore = create((set) => ({
     ProductDetails:null,
     ProductDetailsRequest : async (productID) => {
         set({ProductDetails : null})
-        let url = `http://localhost:5050/api/ProductDetails/${productID}` //id
+        let url = `${baseURl}ProductDetails/${productID}` //id
         let res = await axios.get(url)
         if(res.data['status'] === "success"){
             set({ProductDetails : res.data['data']})
@@ -89,7 +91,7 @@ const ProductStore = create((set) => ({
 
     ProductReviewList:null,
     ProductReviewListRequest : async (productID) => {
-        let url = `http://localhost:5050/api/ProductReviewList/${productID}` //id
+        let url = `${baseURl}ProductReviewList/${productID}` //id
         let res = await axios.get(url)
         if(res.data['status'] === "success"){
             set({ProductReviewList : res.data['data']})

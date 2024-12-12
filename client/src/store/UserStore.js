@@ -3,6 +3,8 @@ import {create} from "zustand";
 import Cookies from 'js-cookie'
 import {getEmail, setEmail, unauthorized} from "../utility/utility.js";
 
+let baseURl = "https://e-commerce-project-six-eta.vercel.app/api/"
+
 const UserStore = create((set) => ({
 
     loginFormData: {email:""},
@@ -28,7 +30,7 @@ const UserStore = create((set) => ({
     isFromSubmit: false,
     UserLoginRequest: async (email) => {
         set({isFromSubmit: true});
-        let url = `http://localhost:5050/api/Login/${email}`
+        let url = `${baseURl}Login/${email}`
         // set email session Storage
         setEmail(email)
         let res = await axios.post(url)
@@ -39,7 +41,7 @@ const UserStore = create((set) => ({
     UserVerifyRequest: async (otp) => {
         set({isFromSubmit: true});
         let email = getEmail()
-        let url = `http://localhost:5050/api/VerifyLogin/${email}/${otp}`
+        let url = `${baseURl}VerifyLogin/${email}/${otp}`
         let res = await axios.post(url,{withCredentials:true})
 
         if(res.data['status'] === "success"){
@@ -55,7 +57,7 @@ const UserStore = create((set) => ({
     // UserLogOut
     UserLogoutRequest: async () => {
         set({isFormSubmit:true})
-        let url = `http://localhost:5050/api/UserLogout`
+        let url = `${baseURl}UserLogout`
         let res = await axios.get(url,{
             headers: {
                 token : Cookies.get('token')
@@ -83,7 +85,7 @@ const UserStore = create((set) => ({
     ProfileDetails : null,
     ProfileDetailsRequest: async () => {
         try{
-            let url = `http://localhost:5050/api/ReadProfile`
+            let url = `${baseURl}ReadProfile`
             let res = await axios.get(url,{headers: {token : Cookies.get('token')}})
             if(res.data.data.length > 0){
                 set({ProfileDetails:res.data.data[0]})
@@ -99,7 +101,7 @@ const UserStore = create((set) => ({
     },
     ProfileSaveRequest: async (PostBody) => {
         try{
-            let url = `http://localhost:5050/api/UpdateProfile`
+            let url = `${baseURl}UpdateProfile`
             set({ProfileDetails: null})
             let res = await axios.post(url,PostBody,{headers: {token : Cookies.get('token')}})
             return res.data['status'] === "success"

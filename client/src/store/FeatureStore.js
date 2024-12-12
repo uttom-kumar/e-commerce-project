@@ -1,10 +1,12 @@
 import axios from "axios";
 import {create} from "zustand";
 
+let baseURl = "https://e-commerce-project-six-eta.vercel.app/api/"
+
 const FeatureStore = create((set) => ({
     FeatureList : null,
     FeatureListRequest : async () => {
-        let url = 'http://localhost:5050/api/FeatureList'
+        let url = `${baseURl}FeatureList`
         let res = await axios.get(url)
         if(res.data['status'] === "success"){
             set({FeatureList : res.data['data']})
@@ -12,7 +14,7 @@ const FeatureStore = create((set) => ({
     },
     LegalDetails: null,
     LegalDetailsRequest : async (type) => {
-        let url = `http://localhost:5050/api/LegalDetails/${type}`
+        let url = `${baseURl}LegalDetails/${type}`
         let res = await axios.get(url)
         if(res.data['status'] === "success"){
             set({LegalDetails : res.data['data']})

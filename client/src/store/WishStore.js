@@ -3,6 +3,7 @@ import axios from "axios";
 import {unauthorized} from "../utility/utility.js";
 import Cookies from "js-cookie";
 
+let baseURl = "https://e-commerce-project-six-eta.vercel.app/api/"
 
 const WishStore = create((set)=>({
     isWishSubmit:false,
@@ -10,7 +11,7 @@ const WishStore = create((set)=>({
     WishSaveRequest: async (productID) => {
         try {
             set({isWishSubmit:true})
-            let url = `http://localhost:5050/api/SaveWishList`
+            let url = `${baseURl}SaveWishList`
             let res = await axios.post(url, {productID:productID},{headers: {token: Cookies.get('token')}})
             return res.data['status'] === "success"
         }catch (e) {
@@ -25,7 +26,7 @@ const WishStore = create((set)=>({
     WishListRequest: async () => {
         try {
             set({isWishSubmit:true})
-            let url = `http://localhost:5050/api/ReadWishList`
+            let url = `${baseURl}ReadWishList`
             let res = await axios.get(url,{headers: {token: Cookies.get('token')}})
             set({WishList: res.data['data']})
             set({WishCount: (res.data['data']).length})
@@ -36,7 +37,7 @@ const WishStore = create((set)=>({
     },
     WishListRemoveRequest : async (productID) => {
         try {
-            let url = `http://localhost:5050/api/RemoveWishList`
+            let url = `${baseURl}RemoveWishList`
             await axios.post(url, {productID:productID},{headers: {token: Cookies.get('token')}})
         }
         catch (err){

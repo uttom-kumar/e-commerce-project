@@ -3,6 +3,9 @@ import Cookies from "js-cookie";
 import {unauthorized} from "../utility/utility.js";
 import {create} from 'zustand'
 
+let baseURl = "https://e-commerce-project-six-eta.vercel.app/api/"
+
+
 const CartStore = create((set)=>({
     isCartSubmit : false,
     CartForm: {productID:"", color:"",size:""},
@@ -21,7 +24,7 @@ const CartStore = create((set)=>({
             set({isCartSubmit : true})
             PostBody.productID = productID;
             PostBody.qty = quantity
-            let url = `http://localhost:5050/api/CreateCartList`
+            let url = `${baseURl}CreateCartList`
             let res = await axios.post(url,PostBody,{headers: {token: Cookies.get('token')}})
             if(res.data['status'] === "success"){
                 set({isCartSubmit : false})
@@ -47,7 +50,7 @@ const CartStore = create((set)=>({
     CartListReadRequest: async () => {
         try{
             set({isCartSubmit : true});
-            let url = 'http://localhost:5050/api/ReadCartList'
+            let url = '${baseURl}ReadCartList'
             let res = await axios.get(url,{headers: {token: Cookies.get('token')}})
             set({CartList:res.data['data']})
             set({CartCount:res.data['data'].length})
@@ -80,7 +83,7 @@ const CartStore = create((set)=>({
 
     removeCartListRequest: async (cartID,productID) => {
         try{
-            let url = `http://localhost:5050/api/RemoveCartList`
+            let url = `${baseURl}RemoveCartList`
             set({CartList: null})
             await axios.post(url,{"_id":cartID, "productID":productID},{headers: {token: Cookies.get('token')}})
         }
@@ -92,7 +95,7 @@ const CartStore = create((set)=>({
     CreateInvoiceRequest: async () => {
         try {
             set({isCartSubmit : true})
-            let url = `http://localhost:5050/api/CreateInvoice`
+            let url = `${baseURl}CreateInvoice`
             let res = await axios.get(url,{headers: {token: Cookies.get('token')}})
             window.location.href=res.data['data']['GatewayPageURL']
         }
@@ -108,7 +111,7 @@ const CartStore = create((set)=>({
     InvoiceList: null,
     InvoiceListRequest: async () => {
         try{
-            let url = `http://localhost:5050/api/InvoiceList`
+            let url = `${baseURl}InvoiceList`
             let res = await axios.get(url,{headers: {token: Cookies.get('token')}})
             set({InvoiceList:res.data['data']})
         }
@@ -120,7 +123,7 @@ const CartStore = create((set)=>({
     InvoiceProductList : null,
     InvoiceProductListRequest: async (id) => {
         try {
-            let url = `http://localhost:5050/api/InvoiceProductList/${id}`
+            let url = `${baseURl}voiceProductList/${id}`
             let res = await axios.get(url,{headers: {token: Cookies.get('token')}})
             set({InvoiceProductList : res.data['data']})
         }

@@ -3,6 +3,7 @@ import {unauthorized} from "../utility/utility.js";
 import axios from "axios";
 import Cookies from "js-cookie";
 
+let baseURl = "https://e-commerce-project-six-eta.vercel.app/api/"
 
 const ReviewStore = create((set)=>({
     isReviewSubmit: false,
@@ -18,7 +19,7 @@ const ReviewStore = create((set)=>({
     ReviewCreateRequest: async (postBody) => {
         try{
             set({isReviewSubmit:true})
-            let url = `http://localhost:5050/api/CreateProductReview`
+            let url = `${baseURl}CreateProductReview`
             let res = await axios.post(url,postBody,{headers: {token: Cookies.get('token')}})
             set({isReviewSubmit: false})
             return res.data['status'] === "success"
