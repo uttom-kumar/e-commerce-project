@@ -53,14 +53,14 @@ const CartStore = create((set)=>({
             let url = '${baseURl}ReadCartList'
             let res = await axios.get(url,{headers: {token: Cookies.get('token')}})
             set({CartList:res.data['data']})
-            set({CartCount:res.data['data']?.length})
+            set({CartCount:res.data?.data?.length})
             set({isCartSubmit : false})
 
             let total = 0
             let vat= 0
             let payable = 0
 
-            res.data['data'].forEach((item)=>{
+            res.data?.data?.forEach((item)=>{
                 if(item['product']?.discount===true){
                     total = total+parseInt(item['qty']*parseInt(item['product']['discountPrice']))
                 }
