@@ -33,7 +33,7 @@ const CartComponent = () => {
                     <div className="row">
                         <div className="col-md-12">
                             <div className="card p-4">
-                                <ul className="list-group list-group-flush"> {CartList.map((item, i) => {
+                                <ul className="list-group list-group-flush"> {CartList?.map((item, i) => {
                                     // check discount === ture ? then discountPrice : regular Price
                                     let price = item['product']['price']
                                     if(item['product']?.discount===true){
@@ -56,7 +56,7 @@ const CartComponent = () => {
                                                     {parseInt(price)*parseInt(item['qty'])}
                                                 </p>
                                             </div>
-                                            <button onClick={() =>RemoveCart(item['_id'],item.productID)} className="btn btn-sm btn-outline-danger">
+                                            <button onClick={() =>RemoveCart(item['_id'],item?.productID)} className="btn btn-sm btn-outline-danger">
                                                 <i className="bi bi-trash"></i>
                                             </button>
                                         </li>)
