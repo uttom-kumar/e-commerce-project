@@ -24,7 +24,7 @@ const CartComponent = () => {
     }
 
     if(CartList===null){return <CartSkeleton />}
-    else if(CartList.length === 0){return <NoDataFound />}
+    else if(CartList?.length === 0){return <NoDataFound />}
 
     else{
         return (
