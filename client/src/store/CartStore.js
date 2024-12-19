@@ -28,11 +28,8 @@ const CartStore = create((set)=>({
             let res = await axios.post(url,PostBody,{headers: {token: Cookies.get('token')}})
             if(res.data['status'] === "success"){
                 set({isCartSubmit : false})
-
                 return res.data['status'] === "success"
             }
-
-
         }
         catch (err){
             unauthorized(err.response.status)
@@ -50,16 +47,15 @@ const CartStore = create((set)=>({
     CartListReadRequest: async () => {
         try{
             set({isCartSubmit : true});
-            let url = '${baseURl}ReadCartList'
+            let url = `${baseURl}ReadCartList`
             let res = await axios.get(url,{headers: {token: Cookies.get('token')}})
             set({CartList:res.data['data']})
-            set({CartCount:res.data?.data?.length})
+            set({CartCount: res.data['data'].length})
             set({isCartSubmit : false})
 
             let total = 0
             let vat= 0
             let payable = 0
-
             res.data?.data?.forEach((item)=>{
                 if(item['product']?.discount===true){
                     total = total+parseInt(item['qty']*parseInt(item['product']['discountPrice']))
@@ -76,7 +72,7 @@ const CartStore = create((set)=>({
             set({CartPayableTotal:payable})
         }
         catch (err){
-            unauthorized(err.response.status)
+            unauthorized(err.response?.status)
             set({isCartSubmit : false})
         }
     },

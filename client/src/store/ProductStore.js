@@ -27,7 +27,6 @@ const ProductStore = create((set) => ({
     ProductSliderListRequest : async () => {
         let url = `${baseURl}ProductSliderList`
         let res = await axios.get(url)
-        console.log(res);
         
         if(res.data['status'] === "success"){
             set({ProductSliderList : res.data['data']})

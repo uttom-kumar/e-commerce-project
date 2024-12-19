@@ -3,9 +3,17 @@ import NoDataFound from "../noData/noDataFound.jsx";
 import CartSkeleton from "../../skeleton/CartSkeleton.jsx";
 import CartSubmitButton from "./cart-submit-button.jsx";
 import toast from "react-hot-toast";
+import { useEffect } from 'react';
 
 const CartComponent = () => {
     const{CartList,CartListReadRequest, removeCartListRequest,CartTotal,CartVatTotal,CartPayableTotal,CreateInvoiceRequest  } = CartStore()
+
+
+    useEffect(() => {
+        (async() => {
+            CartListReadRequest()
+        })()
+    },[])
 
     const RemoveCart = async (cartID, productID) => {
         await removeCartListRequest(cartID, productID)
