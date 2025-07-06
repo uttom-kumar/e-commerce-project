@@ -51,3 +51,8 @@
 .dropdown_menu{
     left: -120px !important;
 }
+
+
+.image-gallery-image{
+    aspect-ratio:  16/9 !important;
+}
