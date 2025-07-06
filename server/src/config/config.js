@@ -7,7 +7,7 @@ export const EMAIL_HOST = "smtp.gmail.com"
 export const EMAIL_PORT = 587
 export const EMAIL_SECURITY=false
 export const EMAIL_USER="uttom00781@gmail.com"
-export const EMAIL_PASS="zsscyvhplonhxxsq"
+export const EMAIL_PASS="jrlqpfqeimdflpjs"
 export const EMAIL_UN_AUTH=false
 
 export const WEB_CACHE = false
